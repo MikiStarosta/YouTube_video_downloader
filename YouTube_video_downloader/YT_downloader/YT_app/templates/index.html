@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maшт page</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: lightblue;
+         }
+        .wrapper{
+            width: 90%;
+            margin: 0px auto;
+        }
+        .search {
+            width: 75%;
+            margin: 0px auto;
+            text-align: center;
+
+        }
+        .title  {
+            font-size: 24px;
+            text-align: center;
+            color: #777;
+        }
+        .input_line {  
+            display: inline-block;          
+            width: 500px;
+            border: 2px solid #ccc;
+            border-radius: 0;
+            background-color: #fff;
+            padding: 10px;
+            color: #777;
+        }
+        .searc_button {
+            margin: 0 0 0 15px;
+            padding: 10px;
+            background-color: #ff0068;
+            border: none;
+            color: #fff;
+            cursor: pointer;    
+            display: inline-block;
+        }
+        .message {
+        text-align: center;
+        color: #ff0068;
+
+        }
+        .vid_title {
+            font-size: 20px;
+            text-align: center;
+            
+        }
+        .prevju {
+            padding: 0 20%;
+            max-width: 400px;
+
+        
+        }
+        .rows {
+            margin: 50px 0 0 0;
+            display: flex;
+           
+        }
+        .colums {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            padding: 0 0 0 30px;
+        }
+        .d_colums {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: row;
+        }
+        .kcolums {
+            width: 650px;
+        }
+        .resolution {
+            margin: 0 30px 0 0
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">   
+    <p class="title">Download video from YouTube for free</p>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="search">
+                <span class="">
+                    <input class="input_line" class="input" name="url" type="text" value="{{url}}" placeholder="Enter yout URL..." autocomplete="off"/>
+                </span>
+                <input class="searc_button" class="but" type="submit" name="search" value="Search"/>
+            </div>
+            <p class="message" >{{status}}</p>
+                <div class="rows">
+                    <div class="kcolums">
+                    <img class="prevju" src="{{vid_prevju}}" alt="">
+                    <p class="vid_title"> {{ vid_title }}</p>
+                    </div>
+                   <div class="colums"> 
+                    {% for i in streams%}
+                    <div class="d_colums">
+                        <p class="resolution">{{ i.resolution}}</p>
+                        <button class="download_button" type="submit" name="download" value="{{forloop.counter}}">  Download</button>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+        </form>
+    </div>
+</body>
+</html>
